@@ -44,7 +44,7 @@ for(let nota of notas) {
         mostrarPosicionSaxo(notes[notaTocada], notaTocada);
         const audio = new Audio(`sounds/${notaTocada}.mp3`);
         audio.play();
-    })
+    });
 }
 
 notePiano.addEventListener('change', (e) => {
@@ -64,11 +64,11 @@ notePiano.addEventListener('change', (e) => {
 function mostrarPosicionSaxo(notaSaxo, notaPiano) {
     let img = 
     `
-    <div class="col s12 m2">
+    <div class="col s12 m4 l2">
         <div class="card">
             <div class="card-image">
                 <img src="img/${notaSaxo}.png" alt="">
-                <span class="card-title right-align grey darken-4">${notaPiano}</span>
+                <span class="card-title grey darken-4">${notaPiano}</span>
             </div>
         </div>
     </div>
