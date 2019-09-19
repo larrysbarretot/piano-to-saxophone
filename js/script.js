@@ -34,8 +34,10 @@ notes['A6b'] = 'F6';
 
 const notePiano = document.getElementById('piano');
 const noteSaxophoneContainer = document.getElementById('saxophone');
-
+const carouseContainer = document.querySelector('.glider-track');
 const notas = document.querySelectorAll('.tecla');
+const vistaHorizontal = document.querySelector('.view-h');
+const vistaCompleta = document.querySelector('.view-f');
 
 for(let nota of notas) {
     nota.addEventListener('click', function() {
@@ -44,6 +46,7 @@ for(let nota of notas) {
         mostrarPosicionSaxo(notes[notaTocada], notaTocada);
         const audio = new Audio(`sounds/${notaTocada}.mp3`);
         audio.play();
+        glider.refresh(true);
     });
 }
 
@@ -73,5 +76,22 @@ function mostrarPosicionSaxo(notaSaxo, notaPiano) {
         </div>
     </div>
     `
+    let figure = 
+    `
+    <figure>
+        <img src="img/${notaSaxo}.png" alt="">
+    </figure>
+    `
+    carouseContainer.innerHTML += figure;
     noteSaxophoneContainer.innerHTML += img;
 }
+
+vistaHorizontal.addEventListener('click', () => {
+    document.getElementById('carousel').style.visibility = 'visible';
+    document.getElementById('saxophone').style.visibility = 'hidden';
+});
+
+vistaCompleta.addEventListener('click', () => {
+    document.getElementById('carousel').style.visibility = 'hidden';
+    document.getElementById('saxophone').style.visibility = 'visible';
+});

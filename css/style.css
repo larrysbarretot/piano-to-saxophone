@@ -14,3 +14,23 @@ blockquote{
 nav .brand-logo.center {
     width: 100%;
 }
+
+figure.glider-slide {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+figure.glider-slide img {
+    display: block;
+    margin: 0 auto;
+    height: 280px;
+}
+
+.view-unselected {
+    visibility: hidden;
+}
+
+.btn {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
