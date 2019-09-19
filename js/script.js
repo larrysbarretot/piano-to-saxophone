@@ -64,7 +64,7 @@ notePiano.addEventListener('change', (e) => {
 function mostrarPosicionSaxo(notaSaxo, notaPiano) {
     let img = 
     `
-    <div class="col s12 m6 l4">
+    <div class="col s12 m2">
         <div class="card">
             <div class="card-image">
                 <img src="img/${notaSaxo}.png" alt="">
