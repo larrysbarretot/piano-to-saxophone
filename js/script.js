@@ -131,6 +131,7 @@ vistaHorizontal.addEventListener('click', () => {
 vistaCompleta.addEventListener('click', () => {
     document.getElementById('carousel').style.visibility = 'hidden';
     document.getElementById('saxophone').style.visibility = 'visible';
+    noteSaxophoneContainer.innerHTML = '';
     noteSaxophoneContainer.appendChild(viewFullPosition());
     carouseContainer.innerHTML = '';
 });
