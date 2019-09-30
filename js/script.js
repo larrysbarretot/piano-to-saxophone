@@ -38,10 +38,12 @@ const carouseContainer = document.querySelector('.glider-track');
 const notas = document.querySelectorAll('.tecla');
 const vistaHorizontal = document.querySelector('.view-h');
 const vistaCompleta = document.querySelector('.view-f');
+let record = [];
 
 for(let nota of notas) {
     nota.addEventListener('click', function() {
         let notaTocada = this.dataset.note;
+        record.push(notaTocada);
         notePiano.value += notaTocada + ' ';
         mostrarPosicionSaxo(notes[notaTocada], notaTocada);
         const audio = new Audio(`sounds/${notaTocada}.mp3`);
@@ -65,17 +67,6 @@ notePiano.addEventListener('change', (e) => {
 });
 
 function mostrarPosicionSaxo(notaSaxo, notaPiano) {
-    let img = 
-    `
-    <div class="col s12 m4 l2">
-        <div class="card">
-            <div class="card-image">
-                <img src="img/${notaSaxo}.png" alt="">
-                <span class="card-title grey darken-4">${notaPiano}</span>
-            </div>
-        </div>
-    </div>
-    `
     let figure = 
     `
     <figure>
@@ -83,15 +74,62 @@ function mostrarPosicionSaxo(notaSaxo, notaPiano) {
     </figure>
     `
     carouseContainer.innerHTML += figure;
-    noteSaxophoneContainer.innerHTML += img;
+}
+
+function viewFullPosition() {
+    const virtualContainer = document.createDocumentFragment();
+    for (let i = 0; i < record.length; i++) {
+        virtualContainer.appendChild(createElementFullPosition(notes[record[i]], record[i]));
+    }
+    return virtualContainer;
+}
+
+function viewHorizontalPosition() {
+    const virtualContainer = document.createDocumentFragment();
+    for (let i = 0; i < record.length; i++) {
+        virtualContainer.appendChild(createElementHorizontalPosition(notes[record[i]], record[i]));
+    }
+    return virtualContainer;
+}
+
+function createElementHorizontalPosition(saxophoneNote, pianoNote) {
+    const figure = document.createElement('figure');
+    const img = document.createElement('img');
+    img.setAttribute('src', `img/${saxophoneNote}.png`);
+    figure.appendChild(img);
+    return figure;
+}
+
+function createElementFullPosition(saxophoneNote, pianoNote) {
+    const divLayout = document.createElement('div');
+    divLayout.classList.add('col', 's12', 'm4', 'l2');
+    const divCard = document.createElement('div');
+    divCard.classList.add('card');
+    const divImage = document.createElement('div');
+    divImage.classList.add('card-image');
+    const img = document.createElement('img');
+    img.setAttribute('src', `img/${saxophoneNote}.png`);
+    const span = document.createElement('span');
+    span.classList.add('card-title', 'grey', 'darken-4');
+    span.textContent = pianoNote;
+    divImage.appendChild(img);
+    divImage.appendChild(span);
+    divCard.appendChild(divImage);
+    divLayout.appendChild(divCard);
+    return divLayout;
 }
 
 vistaHorizontal.addEventListener('click', () => {
     document.getElementById('carousel').style.visibility = 'visible';
     document.getElementById('saxophone').style.visibility = 'hidden';
+    carouseContainer.appendChild(viewHorizontalPosition());
+    glider.refresh(true);
+    noteSaxophoneContainer.innerHTML = '';
 });
 
 vistaCompleta.addEventListener('click', () => {
     document.getElementById('carousel').style.visibility = 'hidden';
     document.getElementById('saxophone').style.visibility = 'visible';
+    noteSaxophoneContainer.appendChild(viewFullPosition());
+    carouseContainer.innerHTML = '';
 });
