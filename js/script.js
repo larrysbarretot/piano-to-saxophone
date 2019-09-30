@@ -122,6 +122,7 @@ function createElementFullPosition(saxophoneNote, pianoNote) {
 vistaHorizontal.addEventListener('click', () => {
     document.getElementById('carousel').style.visibility = 'visible';
     document.getElementById('saxophone').style.visibility = 'hidden';
+    carouseContainer.innerHTML = '';
     carouseContainer.appendChild(viewHorizontalPosition());
     glider.refresh(true);
     noteSaxophoneContainer.innerHTML = '';
